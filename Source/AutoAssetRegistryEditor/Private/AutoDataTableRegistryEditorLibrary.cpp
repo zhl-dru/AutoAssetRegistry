@@ -44,6 +44,10 @@ bool UAutoDataTableRegistryEditorLibrary::RebuildRegistry(UAutoDataTableRegistry
 
 bool UAutoDataTableRegistryEditorLibrary::RebuildAllRegistries()
 {
-	return FProjectAssetCollector::RebuildAll<UAutoDataTableRegistry>(Rebuild);
+	return FProjectAssetCollector::RebuildAll<UAutoDataTableRegistry>(
+		[](UAutoDataTableRegistry* Registry)
+		{
+			return Rebuild(Registry);
+		});
 }
 

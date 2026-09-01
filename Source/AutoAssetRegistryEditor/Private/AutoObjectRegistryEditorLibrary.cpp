@@ -33,6 +33,10 @@ bool UAutoObjectRegistryEditorLibrary::RebuildRegistry(UAutoObjectRegistry* Regi
 
 bool UAutoObjectRegistryEditorLibrary::RebuildAllRegistries()
 {
-	return FProjectAssetCollector::RebuildAll<UAutoObjectRegistry>(Rebuild);
+	return FProjectAssetCollector::RebuildAll<UAutoObjectRegistry>(
+		[](UAutoObjectRegistry* Registry)
+		{
+			return Rebuild(Registry);
+		});
 }
 

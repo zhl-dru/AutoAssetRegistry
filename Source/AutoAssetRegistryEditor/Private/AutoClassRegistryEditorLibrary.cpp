@@ -80,6 +80,10 @@ bool UAutoClassRegistryEditorLibrary::RebuildRegistry(UAutoClassRegistry* Regist
 
 bool UAutoClassRegistryEditorLibrary::RebuildAllRegistries()
 {
-	return FProjectAssetCollector::RebuildAll<UAutoClassRegistry>(RebuildInternal);
+	return FProjectAssetCollector::RebuildAll<UAutoClassRegistry>(
+		[](UAutoClassRegistry* Registry)
+		{
+			return RebuildInternal(Registry);
+		});
 }
 
